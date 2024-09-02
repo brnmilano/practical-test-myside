@@ -1,0 +1,166 @@
+@import "./breakpoints";
+
+:root {
+  --primary: #ff3b49;
+  --secondary: #002d40;
+
+  --alert: #e9ba15;
+  --success: #2e7d32;
+  --error: #d21b1b;
+
+  // Base colors
+  --white: #ffffff;
+  --black: #000000;
+  --link: #7b7b7b;
+
+  // Component colors
+  --disabled-input: #ebebeb;
+  --scroll: #c2c2c2;
+}
+
+:focus {
+  outline: none;
+}
+
+html {
+  background-color: var(--white);
+  width: 100%;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  color: var(--black);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+// Styles for mobiles
+@include media-xs {
+  h1 {
+    font-size: 32px;
+    line-height: 38px;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  h2 {
+    font-size: 24px;
+    line-height: 29px;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: 20px;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 21px;
+  }
+}
+
+// Styles for large mobiles
+@include media-sm {
+  h1 {
+    font-size: 36px;
+    line-height: 42px;
+  }
+
+  h2 {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  h3 {
+    font-size: 22px;
+  }
+
+  p {
+    font-size: 17px;
+    line-height: 22px;
+  }
+}
+
+// Styles for tablets
+@include media-md {
+  h1 {
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  h2 {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+// Styles for desktops
+@include media-lg {
+  h1 {
+    font-size: 44px;
+    line-height: 58.09px;
+  }
+
+  h2 {
+    font-size: 32px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 21.78px;
+  }
+}
+
+// Scrollbar SCSS
+html {
+  scroll-behavior: smooth;
+}
+
+// Global scrollbar styling
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll) rgb(255, 255, 255);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll) rgb(255, 255, 255);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgb(255, 255, 255);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scroll);
+  border-radius: 5px;
+  border: 3px solid var(--scroll);
+}
