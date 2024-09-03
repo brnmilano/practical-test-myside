@@ -3,7 +3,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+
+  .searchWrapper {
+    width: 100%;
+    padding-bottom: 2rem;
+
+    .formWrapper {
+      display: flex;
+      gap: 1.25rem;
+    }
+  }
 
   .productsWrapper {
     display: grid;

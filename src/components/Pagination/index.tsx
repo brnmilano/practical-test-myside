@@ -1,6 +1,6 @@
-import { Box } from "@mui/material";
 import { Pagination as PaginationMaterial } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { Box } from "@mui/material";
 import { ChangeEvent } from "react";
 import PaginationItem from "@mui/material/PaginationItem";
 import Stack from "@mui/material/Stack";
@@ -23,7 +23,7 @@ interface PaginationProps {
   currentPage: number;
 }
 
-export function Pagination({
+export default function Pagination({
   onChangePage,
   pagesQuantity,
   currentPage,

@@ -1,53 +1,57 @@
+import { GetStaticPaths, GetStaticProps } from "next";
 import { productsPath } from "@/constants/paths";
 import { api } from "@/services";
 import { ProductDetails } from "@/types/products";
-import { GetStaticPaths, GetStaticProps } from "next";
 import { Helmet } from "react-helmet-async";
+import { Button } from "@/components/Form/Button";
 import Image from "next/image";
 import styles from "./styles.module.scss";
-import { Button } from "@/components/Form/Button";
 
 interface ProductProps {
+  /**
+   * Informações detalhadas do produto a ser exibido na página.
+   */
   product: ProductDetails;
 }
 
 export default function Product({ product }: ProductProps) {
-  console.log(product);
-
-  const titleFormatted = product.title.split(" ").slice(0, 3).join(" ");
+  const { id, title, category, price, description, image } = product;
 
   return (
     <>
       <Helmet>
-        <title>{`${titleFormatted}`}</title>
+        <title>{`${title}`}</title>
 
-        <link rel="icon" type="image/png" href="./favicon.png" sizes="16x16" />
+        <link rel="preload" as="image" href={image} />
 
-        <link rel="preload" as="image" href={product.image} />
+        <link
+          rel="canonical"
+          href={`https://practical-test-myside.vercel.app/product/${id}`}
+        />
       </Helmet>
 
       <div className={styles.container}>
         <div className={styles.imageWrapper}>
           <Image
-            src={product.image}
-            alt={product.title}
+            src={image}
+            alt={title}
             width={250}
             height={250}
-            priority
+            priority={true}
           />
         </div>
 
         <div className={styles.productDetails}>
           <div className={styles.titleAndCategory}>
-            <h1>{titleFormatted}</h1>
+            <h1>{title}</h1>
 
-            <p className={styles.category}>{product.category}</p>
+            <p className={styles.category}>{category}</p>
           </div>
 
-          <span className={styles.price}>{product.price}</span>
+          <span className={styles.price}>{price}</span>
 
-          <p className={styles.description} title={product.description}>
-            {product.description}
+          <p className={styles.description} title={description}>
+            {description}
           </p>
 
           <div className={styles.addToCartButton}>
@@ -61,11 +65,7 @@ export default function Product({ product }: ProductProps) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [
-      {
-        params: { id: "1" },
-      },
-    ],
+    paths: [],
     fallback: "blocking",
   };
 };
@@ -76,23 +76,36 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
 }) => {
   const productId = params?.id;
 
-  const productDetails = await api.get(`${productsPath}/${productId}`);
-  const priceFormatted = productDetails.data.price;
+  const response = await api.get(`${productsPath}/${productId}`);
+
+  const { data } = response;
+
+  const titleFormatted = data.title?.split(" ").slice(0, 3).join(" ");
+
+  const product = {
+    id: data.id ?? "",
+    title: titleFormatted ?? "",
+    price: new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(data.price),
+    description: data.description ?? "",
+    image: data.image ?? "",
+    category: data.category ?? "",
+  };
 
   return {
     props: {
-      product: {
-        id: productDetails.data.id,
-        title: productDetails.data.title,
-        price: new Intl.NumberFormat("pt-BR", {
-          style: "currency",
-          currency: "BRL",
-        }).format(priceFormatted),
-        description: productDetails.data.description,
-        image: productDetails.data.image,
-        category: productDetails.data.category,
-      },
+      product,
     },
-    revalidate: 60 * 60 * 1, // 1 hora
+    /**
+     * Gera a página estática no momento da primeira requisição e a mantém
+     * até que o tempo de revalidação seja atingido. Após isso, a próxima pessoa
+     * que acessar a página fará uma nova requisição para o servidor e uma nova
+     * página estática será gerada.
+     *
+     * Isso acontecerá de 1 em 1 hora.
+     */
+    revalidate: 60 * 60 * 1,
   };
 };

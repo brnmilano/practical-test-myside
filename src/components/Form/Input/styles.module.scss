@@ -18,16 +18,17 @@
     .input {
       border-radius: 6px;
       width: 100%;
-      border: solid 1px var(--base-button);
+      border: solid 1px var(--secondary);
       padding: 10px 15px;
       min-height: 48px !important;
-      color: var(--base-label);
+      color: var(--black);
       font-size: 14px;
       font-family: inherit !important;
-      background-color: var(--base-input);
+      background-color: var(--white);
+      transition: all 0.2s ease-in-out;
 
       &::placeholder {
-        color: var(--gray-400);
+        color: var(--gray-600);
       }
 
       &:disabled {
@@ -37,7 +38,7 @@
       }
 
       &:focus {
-        border: 1px solid var(--yellow-dark)
+        border: 1px solid var(--gray-500);
       }
     }
 
@@ -72,11 +73,4 @@
 .showingErrorMessage {
   visibility: visible;
   opacity: 1;
-}
-
-// Estilos para desktops
-@include media-lg {
-  // .errorMessage {
-  //   margin-top: -2.5px;
-  // }
 }

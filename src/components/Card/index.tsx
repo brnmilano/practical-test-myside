@@ -16,8 +16,6 @@ export default function Card(props: CardProps) {
   const { products } = props;
 
   const handleProductDetails = (productId: number) => {
-    console.log(productId);
-
     router.push(`/product/${productId}`);
   };
 
@@ -45,7 +43,7 @@ export default function Card(props: CardProps) {
               alt={product.title}
               width={150}
               height={150}
-              priority
+              loading="lazy"
             />
           </div>
         </div>
