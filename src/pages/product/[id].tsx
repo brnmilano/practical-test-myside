@@ -32,13 +32,15 @@ export default function Product({ product }: ProductProps) {
 
       <div className={styles.container}>
         <div className={styles.imageWrapper}>
-          <Image
-            src={image}
-            alt={title}
-            width={250}
-            height={250}
-            priority={true}
-          />
+          <div className={styles.imageContent}>
+            <Image
+              src={image}
+              alt={title}
+              fill={true}
+              objectFit="contain"
+              loading="lazy"
+            />
+          </div>
         </div>
 
         <div className={styles.productDetails}>

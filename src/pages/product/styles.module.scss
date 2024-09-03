@@ -9,12 +9,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    max-width: 700px;
-    height: 650px;
+    min-height: 650px;
+    height: 100%;
     border-radius: 8px;
     padding: 0.25rem;
     border: 1px solid var(--secondary);
+
+    .imageContent {
+      height: 200px;
+      width: 100%;
+      position: relative;
+    }
   }
 
   .productDetails {

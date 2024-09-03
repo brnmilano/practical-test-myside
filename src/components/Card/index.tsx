@@ -41,8 +41,8 @@ export default function Card(props: CardProps) {
             <Image
               src={product.image}
               alt={product.title}
-              width={150}
-              height={150}
+              fill={true}
+              objectFit="contain"
               loading="lazy"
             />
           </div>

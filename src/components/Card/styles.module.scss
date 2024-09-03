@@ -33,11 +33,13 @@
       font-size: 1.25rem;
       font-weight: 700;
     }
+  }
 
-    .imageWrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  .imageWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    position: relative;
   }
 }
