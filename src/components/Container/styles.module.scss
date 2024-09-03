@@ -1,0 +1,18 @@
+@import "../../styles/breakpoints";
+
+.container {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 0 5px;
+
+  @include media-md {
+    padding: 0 20px;
+  }
+}
+
+@include media-xs {
+  .container {
+    padding: 0 25px;
+  }
+}

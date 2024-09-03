@@ -1,0 +1,82 @@
+@import "../../../styles/breakpoints";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  position: relative;
+
+  .inputContainer {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .input {
+      border-radius: 6px;
+      width: 100%;
+      border: solid 1px var(--base-button);
+      padding: 10px 15px;
+      min-height: 48px !important;
+      color: var(--base-label);
+      font-size: 14px;
+      font-family: inherit !important;
+      background-color: var(--base-input);
+
+      &::placeholder {
+        color: var(--gray-400);
+      }
+
+      &:disabled {
+        background-color: var(--disabled-input);
+        color: var(--gray-400);
+        cursor: not-allowed;
+      }
+
+      &:focus {
+        border: 1px solid var(--yellow-dark)
+      }
+    }
+
+    .icon {
+      position: absolute;
+      right: 16px;
+      cursor: pointer;
+    }
+  }
+}
+
+.inputError {
+  border: 1px solid var(--error) !important;
+}
+
+.errorMessage {
+  color: var(--error);
+  margin-top: -5px;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    visibility 0.5s,
+    opacity 0.5s linear;
+  position: absolute;
+  bottom: -20px;
+
+  p {
+    font-size: 12px !important;
+  }
+}
+
+.showingErrorMessage {
+  visibility: visible;
+  opacity: 1;
+}
+
+// Estilos para desktops
+@include media-lg {
+  // .errorMessage {
+  //   margin-top: -2.5px;
+  // }
+}

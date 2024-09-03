@@ -1,0 +1,95 @@
+@import "../../../styles/breakpoints";
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  padding: 10px 16px;
+  gap: 16px;
+  min-height: 37px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 700;
+
+  &:disabled {
+    background-color: var(--disabled-input);
+    color: var(--black);
+    cursor: not-allowed;
+  }
+}
+
+.primary {
+  background-color: var(--primary);
+  color: var(--white);
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:hover:disabled {
+    background-color: var(--disabled-input);
+  }
+}
+
+.secondary {
+  background-color: var(--secondary);
+  color: var(--black);
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:hover:disabled {
+    background-color: var(--disabled-input);
+  }
+}
+
+// .icon {
+//   background-color: var(--base-button);
+//   color: var(--base-text);
+//   font-weight: 600;
+
+//   &:hover {
+//     background-color: var(--base-hover);
+//     color: var(--base-subtitle);
+//   }
+// }
+
+.buttonSizeLarge {
+  width: 100%;
+  height: 60px;
+  font-size: 18px;
+}
+
+.buttonSizeMedium {
+  min-width: 267px;
+}
+
+.buttonSizeSmall {
+  min-width: 143px;
+  height: 38px;
+  border-radius: 6px;
+}
+
+// Estilos para tablets
+@include media-md {
+}
+
+// Estilos para desktops
+@include media-lg {
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    padding: 10px 16px;
+    gap: 16px;
+    min-height: 37px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+  }
+}

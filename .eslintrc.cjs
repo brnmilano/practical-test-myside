@@ -10,11 +10,7 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   plugins: ["react-refresh"],
   rules: {
-    "react-refresh/only-export-components": [
-      "warn",
-      { allowConstantExport: true },
-    ],
-    quotes: ["error", "double"], // Usa aspas duplas
-    semi: ["error", "always"], // Exige ponto e vírgula
+    quotes: ["error", "double"],
+    semi: ["error", "always"],
   },
 };
