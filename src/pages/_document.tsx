@@ -5,13 +5,6 @@ export default function Document() {
     <Html lang="pt-BR">
       <Head>
         <meta name="robots" content="index, follow" />
-
-        <link rel="icon" type="image/png" href="./favicon.png" sizes="16x16" />
-
-        <meta
-          name="description"
-          content="A MySide é um Personal Shopper Imobiliário. Enquanto o chefe do corretor é o vendedor do imóvel, o chefe do Personal Shopper é VOCÊ, o comprador."
-        />
       </Head>
 
       <body>

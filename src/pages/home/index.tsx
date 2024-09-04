@@ -2,7 +2,6 @@ import { useState, useMemo, useEffect } from "react";
 import { GetServerSideProps } from "next";
 import { productsPath } from "@/constants/paths";
 import { api } from "@/services";
-import { Helmet } from "react-helmet-async";
 import { Product } from "@/types/products";
 import Pagination from "@/components/Pagination";
 import styles from "./styles.module.scss";
@@ -15,6 +14,7 @@ import {
 } from "@/models/searchProductsSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/Form/Button";
+import Head from "next/head";
 
 interface ProductProps {
   /**
@@ -40,6 +40,10 @@ export default function Home({ products }: ProductProps) {
     formState: { errors, isSubmitting },
   } = useForm<SearchProductsType>({
     resolver: zodResolver(searchProductsSchema),
+    shouldFocusError: false,
+    defaultValues: {
+      searchProducts: "",
+    },
   });
 
   const handleSearchProducts = async (data: SearchProductsType) => {
@@ -82,13 +86,20 @@ export default function Home({ products }: ProductProps) {
 
   return (
     <>
-      <Helmet>
-        <title>Produtos</title>
+      <Head>
+        <title>Produtos | MySide</title>
+        <meta property="og:title" content="Produtos | MySide" />
+
+        <meta
+          name="description"
+          content="A MySide é um Personal Shopper Imobiliário. Enquanto o chefe do corretor é o vendedor do imóvel, o chefe do Personal Shopper é VOCÊ, o comprador."
+        />
+
         <link
           rel="canonical"
           href="https://practical-test-myside.vercel.app/home"
         />
-      </Helmet>
+      </Head>
 
       <div className={styles.container}>
         <div className={styles.searchWrapper}>
@@ -103,6 +114,7 @@ export default function Home({ products }: ProductProps) {
               registerField="searchProducts"
               disabled={isSubmitting}
             />
+
             <Button type="submit" placeholder="Buscar" size="small" />
           </form>
         </div>

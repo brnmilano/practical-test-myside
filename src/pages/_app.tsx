@@ -1,5 +1,4 @@
 import type { AppProps } from "next/app";
-import { Helmet, HelmetProvider } from "react-helmet-async";
 import "../styles/index.scss";
 import { Toaster } from "react-hot-toast";
 import { CommonProvider } from "@/hooks/useCommon";
@@ -15,33 +14,26 @@ const inter = Inter({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <HelmetProvider>
-      <CommonProvider>
-        <Helmet titleTemplate="%s | Teste MySide"></Helmet>
+    <CommonProvider>
+      <Toaster position="top-center" />
 
-        <Toaster position="top-center" />
+      <Container className={inter.className}>
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <Container className={inter.className}>
-          <Head>
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1"
-            />
+          <link
+            rel="icon"
+            type="image/png"
+            href="./favicon.png"
+            sizes="16x16"
+          />
+        </Head>
 
-            <link
-              rel="icon"
-              type="image/png"
-              href="./favicon.png"
-              sizes="16x16"
-            />
-          </Head>
+        <Header />
 
-          <Header />
-
-          <Component {...pageProps} />
-        </Container>
-      </CommonProvider>
-    </HelmetProvider>
+        <Component {...pageProps} />
+      </Container>
+    </CommonProvider>
   );
 }
 

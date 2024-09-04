@@ -2,10 +2,10 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { productsPath } from "@/constants/paths";
 import { api } from "@/services";
 import { ProductDetails } from "@/types/products";
-import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/Form/Button";
 import Image from "next/image";
 import styles from "./styles.module.scss";
+import Head from "next/head";
 
 interface ProductProps {
   /**
@@ -19,16 +19,20 @@ export default function Product({ product }: ProductProps) {
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>{`${title}`}</title>
 
         <link rel="preload" as="image" href={image} />
+
+        <meta name="description" content={description} />
+
+        <meta property="og:image" content={image} />
 
         <link
           rel="canonical"
           href={`https://practical-test-myside.vercel.app/product/${id}`}
         />
-      </Helmet>
+      </Head>
 
       <div className={styles.container}>
         <div className={styles.imageWrapper}>
