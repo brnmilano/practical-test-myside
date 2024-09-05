@@ -75,3 +75,12 @@
     }
   }
 }
+
+// Styles for large desktops
+@include media-xl {
+  .container {
+    .productsWrapper {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+}

@@ -23,7 +23,7 @@ export default function Home({ products }: ProductProps) {
   const { currentPage, setCurrentPage } = useCommon();
   const { searchProducts, setProductsArray, setSearchProducts } = useSearch();
 
-  const productsPerPage = 8;
+  const productsPerPage = 10;
   const totalPages = Math.ceil(searchProducts.length / productsPerPage);
 
   /**
