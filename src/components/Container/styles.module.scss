@@ -4,15 +4,15 @@
   width: 100%;
   max-width: 1250px;
   margin: 0 auto;
-  padding: 0 5px;
+  padding: 0 0.313rem;
 
   @include media-md {
-    padding: 0 20px;
+    padding: 0 1.25rem;
   }
 }
 
 @include media-xs {
   .container {
-    padding: 0 25px;
+    padding: 0 1.563rem;
   }
 }
