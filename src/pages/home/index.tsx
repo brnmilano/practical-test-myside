@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo, useEffect } from "react";
 import { GetServerSideProps } from "next";
 import { Pagination } from "@/components/Pagination";
 import { useSearch } from "@/hooks/useSearch";
 import { productsPath } from "@/constants/paths";
 import { api } from "@/services";
-import { Product } from "@/types/products";
+import { Product, ProductsProps } from "@/types/products";
 import { useCommon } from "@/hooks/useCommon";
 import Head from "next/head";
 import Card from "@/components/Card";
@@ -55,7 +56,6 @@ export default function Home({ products }: ProductProps) {
   useEffect(() => {
     setProductsArray(products);
     setSearchProducts(products);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products]);
 
   return (
@@ -99,7 +99,9 @@ export default function Home({ products }: ProductProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await api.get<Product[]>(productsPath);
+  const response = await api.get<ProductsProps>(productsPath);
+
+  const { data } = response;
 
   /**
    * @description Formatação do título do produto.
@@ -109,7 +111,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
    * - Junta as palavras do array em uma nova string.
    * - Remove os caracteres especiais, especialmente o hífen.
    */
-  const productsFormatted = response.data.map((product) => {
+  const productsFormatted = data.products.map((product) => {
     const titleFormatted = product.title
       .split(" ")
       .slice(0, 2)

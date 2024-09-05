@@ -1,10 +1,18 @@
 export interface Product {
   id: number;
   title: string;
-  price: number;
-  category: string;
-  description: string;
   image: string;
+  price: number;
+  description: string;
+  brand: string;
+  model: string;
+  color: string;
+  category: string;
+  discount: number;
+}
+
+export interface ProductsProps {
+  products: Product[];
 }
 
 export type ProductDetails = Product & {};

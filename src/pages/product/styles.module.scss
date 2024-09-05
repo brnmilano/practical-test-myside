@@ -1,15 +1,17 @@
+@import "../../styles/breakpoints";
+
 .container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   align-items: stretch;
-  gap: 4rem;
-  margin-top: 6.25rem;
+  gap: 2rem;
+  margin-top: 1rem;
 
   .imageWrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 650px;
+    min-height: 250px;
     height: 100%;
     border-radius: 8px;
     padding: 0.25rem;
@@ -25,6 +27,7 @@
   .productDetails {
     display: flex;
     flex-direction: column;
+    margin-bottom: 2rem;
 
     .titleAndCategory {
       display: flex;
@@ -44,13 +47,50 @@
     }
 
     .description {
-      margin-top: 2.5rem;
-      font-size: 1.125rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
       line-height: 1.5;
     }
 
     .addToCartButton {
       margin-top: auto;
+    }
+  }
+}
+
+// Styles for large mobiles
+@include media-sm {
+}
+
+// Styles for table
+@include media-md {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: stretch;
+    gap: 2rem;
+    margin-top: 1.25rem;
+    margin-bottom: 2rem;
+
+    .imageWrapper {
+      min-height: 450px;
+    }
+
+    .productDetails {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Styles for desktops
+@include media-lg {
+  .container {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3.25rem;
+
+    .imageWrapper {
+      min-height: 550px;
     }
   }
 }

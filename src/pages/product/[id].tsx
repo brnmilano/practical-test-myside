@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { productsPath } from "@/constants/paths";
 import { api } from "@/services";
-import { ProductDetails } from "@/types/products";
+import { Product, ProductDetails } from "@/types/products";
 import { Button } from "@/components/Form/Button";
 import Image from "next/image";
 import styles from "./styles.module.scss";
@@ -11,11 +11,11 @@ interface ProductProps {
   /**
    * Informações detalhadas do produto a ser exibido na página.
    */
-  product: ProductDetails;
+  productDetails: ProductDetails;
 }
 
-export default function Product({ product }: ProductProps) {
-  const { id, title, category, price, description, image } = product;
+export default function ViewProduct({ productDetails }: ProductProps) {
+  const { id, title, category, price, description, image } = productDetails;
 
   return (
     <>
@@ -82,27 +82,31 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
 }) => {
   const productId = params?.id;
 
-  const response = await api.get(`${productsPath}/${productId}`);
+  const response = await api.get<{ product: Product }>(
+    `${productsPath}/${productId}`
+  );
 
-  const { data } = response;
+  const { product } = response.data;
 
-  const titleFormatted = data.title?.split(" ").slice(0, 3).join(" ");
+  const titleFormatted = product.title.split(" ").slice(0, 3).join(" ");
 
-  const product = {
-    id: data.id ?? "",
-    title: titleFormatted ?? "",
+  const productDetails = {
+    id: product.id,
+    title: titleFormatted,
     price: new Intl.NumberFormat("pt-BR", {
       style: "currency",
       currency: "BRL",
-    }).format(data.price),
-    description: data.description ?? "",
-    image: data.image ?? "",
-    category: data.category ?? "",
+    }).format(product.price),
+    description: product.description,
+    image: product.image,
+    category: product.category,
   };
+
+  console.log(productDetails);
 
   return {
     props: {
-      product,
+      productDetails,
     },
     /**
      * Gera a página estática no momento da primeira requisição e a mantém

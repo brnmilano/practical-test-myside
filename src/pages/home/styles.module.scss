@@ -1,3 +1,5 @@
+@import "../../styles/breakpoints";
+
 .container {
   display: flex;
   flex-direction: column;
@@ -16,8 +18,8 @@
 
   .productsWrapper {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     grid-column-gap: 1.25rem;
     grid-row-gap: 1.25rem;
   }
@@ -25,12 +27,51 @@
   .totalItensAndPagination {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin: 1.875rem 0;
     width: 100%;
 
     .quantityWrapper {
+      display: none;
       font-size: 0.875rem;
+    }
+  }
+}
+
+// Styles for large mobiles
+@include media-sm {
+  .container {
+    .productsWrapper {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(1, 1fr);
+    }
+  }
+}
+
+// Styles for table
+@include media-md {
+  .container {
+    .productsWrapper {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+
+    .totalItensAndPagination {
+      justify-content: space-between;
+
+      .quantityWrapper {
+        display: flex;
+      }
+    }
+  }
+}
+
+// Styles for desktops
+@include media-lg {
+  .container {
+    .productsWrapper {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
     }
   }
 }
