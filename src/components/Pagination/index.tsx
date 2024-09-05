@@ -1,59 +1,95 @@
-import { Pagination as PaginationMaterial } from "@mui/material";
-import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import { Box } from "@mui/material";
-import { ChangeEvent } from "react";
-import PaginationItem from "@mui/material/PaginationItem";
-import Stack from "@mui/material/Stack";
+import { Box, HStack, Button, ButtonGroup } from "@chakra-ui/react";
+import { MdOutlineChevronLeft } from "react-icons/md";
+import { MdOutlineChevronRight } from "react-icons/md";
 import styles from "./styles.module.scss";
 
 interface PaginationProps {
   /**
-   * Quantidade de páginas a serem exibidas na paginação.
+   * Define a quantidade de páginas a serem exibidas.
+   *
+   * @default 1
+   * @type number
    */
   pagesQuantity: number;
   /**
-   * Atualiza o estado da página atual com o número da página selecionada pelo
-   * usuário, controlando a navegação entre as páginas.
-   * @param currentPage
+   * Define se a paginação está desabilitada.
+   *
+   * @default false
+   * @type boolean
+   */
+  disabled?: boolean;
+  /**
+   * Função responsável por fazer a mudança de página.
+   *
+   * @type function
    */
   onChangePage: (currentPage: number) => void;
   /**
-   * Número da página atual.
+   * Define a página atual.
+   *
+   * @type
+   * @default 1
    */
   currentPage: number;
 }
 
-export default function Pagination({
+export const Pagination = ({
   onChangePage,
   pagesQuantity,
   currentPage,
-}: PaginationProps) {
-  const handleChangePage = (_event: ChangeEvent<unknown>, value: number) => {
-    onChangePage(value);
+  disabled,
+}: PaginationProps) => {
+  const handleChangePage = (newPage: number) => {
+    if (newPage >= 1 && newPage <= pagesQuantity) {
+      onChangePage(newPage);
+    }
+  };
+
+  const renderPaginationItems = () => {
+    const items = [];
+
+    for (let page = 1; page <= pagesQuantity; page++) {
+      items.push(
+        <Button
+          key={page}
+          onClick={() => handleChangePage(page)}
+          isDisabled={disabled || page === currentPage}
+          variant={page === currentPage ? "solid" : "outline"}
+        >
+          {page}
+        </Button>
+      );
+    }
+    return items;
   };
 
   return (
     <Box className={styles.container}>
-      <Stack spacing={4}>
-        <PaginationMaterial
-          count={pagesQuantity}
-          variant={"outlined"}
-          page={currentPage}
-          onChange={handleChangePage}
-          renderItem={(item) => (
-            <PaginationItem
-              classes={{
-                previousNext: styles.icons,
-                page: styles.pageNumber,
-                selected: styles.selectedPageNumber,
-                disabled: styles.disabled,
-              }}
-              slots={{ previous: ChevronLeft, next: ChevronRight }}
-              {...item}
-            />
-          )}
-        />
-      </Stack>
+      <HStack spacing={2}>
+        <button
+          className={styles.button}
+          onClick={() => handleChangePage(currentPage - 1)}
+          disabled={disabled || currentPage === 1}
+        >
+          <MdOutlineChevronLeft />
+        </button>
+
+        <ButtonGroup
+          className={styles.buttonGroup}
+          isAttached
+          variant="outline"
+        >
+          {renderPaginationItems()}
+        </ButtonGroup>
+
+        <button
+          className={styles.button}
+          onClick={() => handleChangePage(currentPage + 1)}
+          disabled={disabled || currentPage === pagesQuantity}
+        >
+          <MdOutlineChevronRight />
+        </button>
+      </HStack>
     </Box>
   );
-}
+};

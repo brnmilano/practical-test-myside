@@ -14,6 +14,16 @@
   border-radius: 6px;
   font-weight: 700;
 
+  div {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  svg {
+    color: var(--white);
+    font-size: 1.625rem;
+  }
+
   &:disabled {
     background-color: var(--disabled-input);
     color: var(--black);
@@ -47,32 +57,31 @@
   }
 }
 
-// .icon {
-//   background-color: var(--base-button);
-//   color: var(--base-text);
-//   font-weight: 600;
+.icon {
+  background-color: var(--primary);
+  color: var(--black);
+  font-weight: 600;
+  min-width: 3.125rem;
 
-//   &:hover {
-//     background-color: var(--base-hover);
-//     color: var(--base-subtitle);
-//   }
-// }
+  &:hover {
+    opacity: 0.8;
+  }
+}
 
 .buttonSizeLarge {
   width: 100%;
-  height: 60px;
-  font-size: 18px;
-}
-
-.buttonSizeMedium {
-  min-width: 267px;
-  height: 54px;
+  height: 3.75rem;
+  font-size: 1.125rem;
 }
 
 .buttonSizeSmall {
-  min-width: 143px;
-  height: 48px;
+  min-width: 6.25rem;
+  height: 3rem;
   border-radius: 6px;
+}
+
+.iconSize {
+ 
 }
 
 // Estilos para tablets

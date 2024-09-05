@@ -1,20 +1,15 @@
-import { useState, useMemo, useEffect } from "react";
+import { useMemo, useEffect } from "react";
 import { GetServerSideProps } from "next";
+import { Pagination } from "@/components/Pagination";
+import { useSearch } from "@/hooks/useSearch";
 import { productsPath } from "@/constants/paths";
 import { api } from "@/services";
 import { Product } from "@/types/products";
-import Pagination from "@/components/Pagination";
-import styles from "./styles.module.scss";
-import Card from "@/components/Card";
-import { Input } from "@/components/Form/Input/Input";
-import { useForm } from "react-hook-form";
-import {
-  searchProductsSchema,
-  SearchProductsType,
-} from "@/models/searchProductsSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/Form/Button";
+import { useCommon } from "@/hooks/useCommon";
 import Head from "next/head";
+import Card from "@/components/Card";
+import styles from "./styles.module.scss";
+import Search from "@/components/Search";
 
 interface ProductProps {
   /**
@@ -24,45 +19,15 @@ interface ProductProps {
 }
 
 export default function Home({ products }: ProductProps) {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [productsArray, setProductsArray] = useState<Product[]>(products);
-  const [searchProducts, setSearchProducts] = useState<Product[]>(products);
+  const { currentPage, setCurrentPage } = useCommon();
+  const { searchProducts, setProductsArray, setSearchProducts } = useSearch();
 
   const productsPerPage = 8;
-  const totalPages = useMemo(
-    () => Math.ceil(searchProducts.length / productsPerPage),
-    [searchProducts]
-  );
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<SearchProductsType>({
-    resolver: zodResolver(searchProductsSchema),
-    shouldFocusError: false,
-    defaultValues: {
-      searchProducts: "",
-    },
-  });
-
-  const handleSearchProducts = async (data: SearchProductsType) => {
-    const filtered = productsArray.filter((product) =>
-      product.title.toLowerCase().includes(data.searchProducts.toLowerCase())
-    );
-
-    setSearchProducts(filtered);
-    setCurrentPage(1); // Resetar para a primeira página após a busca
-  };
-
-  const handlePagination = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
+  const totalPages = Math.ceil(searchProducts.length / productsPerPage);
 
   /**
-   * @description
-   * - alculo da lista de produtos que será exibida na página atual, com base na
-   * paginação.
+   * @description Cálculo da lista de produtos que será exibida na página atual,
+   * com base na paginação.
    *
    * - O hook `useMemo` é utilizado para evitar re-renderizações desncessárias do
    * componente de paginação, uma vez que a lista de produtos exibidos na página
@@ -79,9 +44,18 @@ export default function Home({ products }: ProductProps) {
     );
   }, [currentPage, searchProducts]);
 
+  /**
+   * @description Função de controle para a paginação.
+   * @param pageNumber - Número da página a ser exibida.
+   */
+  const handlePagination = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
   useEffect(() => {
     setProductsArray(products);
     setSearchProducts(products);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products]);
 
   return (
@@ -101,24 +75,9 @@ export default function Home({ products }: ProductProps) {
         />
       </Head>
 
+      <Search />
+
       <div className={styles.container}>
-        <div className={styles.searchWrapper}>
-          <form
-            className={styles.formWrapper}
-            onSubmit={handleSubmit(handleSearchProducts)}
-          >
-            <Input
-              control={control}
-              errors={errors}
-              placeholder="Buscar produtos"
-              registerField="searchProducts"
-              disabled={isSubmitting}
-            />
-
-            <Button type="submit" placeholder="Buscar" size="small" />
-          </form>
-        </div>
-
         <div className={styles.productsWrapper}>
           <Card products={currentPosts} />
         </div>
@@ -142,9 +101,20 @@ export default function Home({ products }: ProductProps) {
 export const getServerSideProps: GetServerSideProps = async () => {
   const response = await api.get<Product[]>(productsPath);
 
+  /**
+   * @description Formatação do título do produto.
+   * - Coloca o titulo em um array
+   * - Retorna apenas as duas primeiras palavras do título.
+   * - Remove os caracteres `-` do título.
+   * - Junta as palavras do array em uma nova string.
+   * - Remove os caracteres especiais, especialmente o hífen.
+   */
   const productsFormatted = response.data.map((product) => {
-    const titleFormatted = product.title.split(" ").slice(0, 3).join(" ");
-    const priceFormatted = product.price;
+    const titleFormatted = product.title
+      .split(" ")
+      .slice(0, 2)
+      .join(" ")
+      .replace(/-/g, " ");
 
     return {
       id: product.id,
@@ -152,7 +122,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       price: new Intl.NumberFormat("pt-BR", {
         style: "currency",
         currency: "BRL",
-      }).format(priceFormatted),
+      }).format(product.price),
       category: product.category,
       description: product.description,
       image: product.image,

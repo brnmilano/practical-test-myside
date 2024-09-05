@@ -1,0 +1,17 @@
+.checkBox {
+  z-index: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  span {
+    color: var(--black) !important;
+
+    svg {
+      color: var(--white);
+    }
+  }
+}
+
+.checked {
+  color: var(--secondary) !important;
+}

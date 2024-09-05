@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { homePath } from "@/constants/paths";
 import Image from "next/image";
 import LogoImg from "../../../public/myside-logo.svg";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
+import { IoCart } from "react-icons/io5";
 import styles from "./styles.module.scss";
 
 export default function Header() {
@@ -21,7 +21,7 @@ export default function Header() {
         <Image src={LogoImg} alt="logo" width={118} height={41} />
       </div>
 
-      <LocalMallIcon aria-label="Carrinho de compras" />
+      <IoCart aria-label="Carrinho de compras" />
     </header>
   );
 }

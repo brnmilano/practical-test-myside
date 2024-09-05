@@ -1,47 +1,77 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ButtonHTMLAttributes } from "react";
-import { CircularProgress } from "@mui/material";
+import { Spinner } from "@chakra-ui/react";
 import styles from "./styles.module.scss";
 import React from "react";
 import clsx from "clsx";
+import { IconType } from "react-icons";
 
 interface ButtonInterface extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Propriedade booleana que indica o estado de carregamento do botão, substituindo o texto por um spinner
+   * Icon or text to be inserted on the right side of the button.
+   * Example:
+   * * rightIcon={<MdBuild />}
+   *
+   * @type `IconType`
+   */
+  rightIcon?: IconType;
+  /**
+   * Icon or text to be inserted on the left side of the button
+   * Example:
+   * * lefticon={<MdBuild />
+   *
+   * @type `IconType`
+   */
+  lefticon?: IconType;
+  /**
+   * Propriedade booleana que indica o estado de carregamento do botão,
+   * substituindo o texto por um spinner.
+   *
+   * @default false
    */
   isloading?: boolean;
   /**
    * Texto exibido dentro do botão.
-   * Desativa a operação do botão durante o loading
+   * Desativa a operação do botão durante o loading.
+   *
+   * @type `string | React.ReactNode`
    */
   placeholder: string | React.ReactNode;
   /**
    * Desativa o botão e insira um tema cinza.
+   *
+   * @default "false"
+   * @type `boolean`
    */
   disabled?: boolean;
   /**
-   * Evento de clique do mouse.
-   * Obs: só é acionado quando o botão não está com o loading ativo.
-   */
-  onClick?: () => void;
-  /**
    * Define o tema do botão.
+   *
    * @default "primary"
+   * @type `primary | secondary | icon`
    */
   theme?: "primary" | "secondary" | "icon";
   /**
    * Define o tamanho do botão.
-   * @default "medium"
+   *
+   * @default "small"
+   * @type `small | large | icon`
    */
-  size?: "small" | "medium" | "large";
+  size?: "small" | "large" | "icon";
 }
+
+const RenderButtonIcon = (Icon: any) => {
+  return <Icon />;
+};
 
 export function Button(props: ButtonInterface) {
   const {
+    rightIcon,
+    lefticon,
     theme = "primary",
     isloading,
     placeholder,
     disabled,
-    onClick,
     size = "medium",
     ...rest
   } = props;
@@ -50,9 +80,6 @@ export function Button(props: ButtonInterface) {
     if (isloading) {
       return;
     }
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    onClick && onClick();
   }
 
   return (
@@ -62,14 +89,24 @@ export function Button(props: ButtonInterface) {
         [styles.secondary]: theme === "secondary",
         [styles.icon]: theme === "icon",
         [styles.buttonSizeSmall]: size === "small",
-        [styles.buttonSizeMedium]: size === "medium",
         [styles.buttonSizeLarge]: size === "large",
+        [styles.iconSize]: size === "icon",
       })}
       disabled={disabled}
       onClick={handleClickOnButton}
       {...rest}
     >
-      {isloading ? <CircularProgress /> : <>{placeholder}</>}
+      {isloading ? (
+        <Spinner color="#fff" />
+      ) : (
+        <>
+          {lefticon && RenderButtonIcon(lefticon)}
+
+          {placeholder}
+
+          {rightIcon && RenderButtonIcon(rightIcon)}
+        </>
+      )}
     </button>
   );
 }

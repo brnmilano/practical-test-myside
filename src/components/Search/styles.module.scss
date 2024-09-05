@@ -5,5 +5,8 @@
   .formWrapper {
     display: flex;
     gap: 1.25rem;
+    background: var(--gray-100);
+    padding: 0.938rem;
+    border-radius: 6px;
   }
 }

@@ -14,18 +14,23 @@ interface useCommonProps {
 interface CommonContextData {
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
+  currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
 }
 
 export const CommonContext = createContext({} as CommonContextData);
 
 function CommonProvider({ children }: useCommonProps) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   return (
     <CommonContext.Provider
       value={{
         loading,
         setLoading,
+        currentPage,
+        setCurrentPage,
       }}
     >
       {children}

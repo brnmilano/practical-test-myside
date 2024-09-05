@@ -6,6 +6,8 @@ import { Inter } from "next/font/google";
 import Container from "@/components/Container/Container";
 import Header from "@/components/Header";
 import Head from "next/head";
+import { ChakraProvider } from "@chakra-ui/react";
+import { SearchProvider } from "@/hooks/useSearch";
 
 const inter = Inter({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -14,26 +16,33 @@ const inter = Inter({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <CommonProvider>
-      <Toaster position="top-center" />
+    <Container className={inter.className}>
+      <ChakraProvider>
+        <CommonProvider>
+          <SearchProvider>
+            <Toaster position="top-center" />
 
-      <Container className={inter.className}>
-        <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <Head>
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              />
 
-          <link
-            rel="icon"
-            type="image/png"
-            href="./favicon.png"
-            sizes="16x16"
-          />
-        </Head>
+              <link
+                rel="icon"
+                type="image/png"
+                href="./favicon.png"
+                sizes="16x16"
+              />
+            </Head>
 
-        <Header />
+            <Header />
 
-        <Component {...pageProps} />
-      </Container>
-    </CommonProvider>
+            <Component {...pageProps} />
+          </SearchProvider>
+        </CommonProvider>
+      </ChakraProvider>
+    </Container>
   );
 }
 
