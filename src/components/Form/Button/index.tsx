@@ -55,9 +55,9 @@ interface ButtonInterface extends ButtonHTMLAttributes<HTMLButtonElement> {
    * Define o tamanho do botão.
    *
    * @default "small"
-   * @type `small | large | icon`
+   * @type `small | large`
    */
-  size?: "small" | "large" | "icon";
+  size?: "small" | "large";
 }
 
 const RenderButtonIcon = (Icon: any) => {
@@ -90,7 +90,6 @@ export function Button(props: ButtonInterface) {
         [styles.icon]: theme === "icon",
         [styles.buttonSizeSmall]: size === "small",
         [styles.buttonSizeLarge]: size === "large",
-        [styles.iconSize]: size === "icon",
       })}
       disabled={disabled}
       onClick={handleClickOnButton}

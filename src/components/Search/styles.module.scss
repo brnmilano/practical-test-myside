@@ -1,12 +1,35 @@
+@import "../../styles/breakpoints";
+
 .searchWrapper {
   width: 100%;
   padding-bottom: 2rem;
 
   .formWrapper {
     display: flex;
+    flex-direction: column;
     gap: 1.25rem;
     background: var(--gray-100);
     padding: 0.938rem;
     border-radius: 6px;
+
+    .searchButtons {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.25rem;
+
+      .searchAndClearFilterButtons {
+        display: flex;
+        gap: 1.25rem;
+      }
+    }
+  }
+}
+
+// Styles for table
+@include media-md {
+  .searchWrapper {
+    .formWrapper {
+      flex-direction: row;
+    }
   }
 }

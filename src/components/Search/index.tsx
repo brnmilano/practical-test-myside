@@ -8,6 +8,8 @@ import {
   searchProductsSchema,
   SearchProductsType,
 } from "@/models/searchProductsSchema";
+import { TbFilterSearch } from "react-icons/tb";
+import { TbFilterX } from "react-icons/tb";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/Form/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,15 +20,15 @@ import { Product } from "@/types/products";
 import { useSearch } from "@/hooks/useSearch";
 import CustomCheckbox from "@/components/Form/Checkbox";
 import styles from "./styles.module.scss";
-import { TbFilterSearch } from "react-icons/tb";
-import { TbFilterX } from "react-icons/tb";
 
 interface SearchCategoryAndTitleProps {
   searchProducts: string;
-  electronics: boolean;
-  jewelery: boolean;
-  mensClothing: boolean;
-  womensClothing: boolean;
+  tv: boolean;
+  audio: boolean;
+  laptop: boolean;
+  mobile: boolean;
+  gaming: boolean;
+  appliances: boolean;
 }
 
 export default function Search() {
@@ -38,16 +40,18 @@ export default function Search() {
     handleSubmit,
     register,
     setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<SearchProductsType>({
     resolver: zodResolver(searchProductsSchema),
     shouldFocusError: true,
     defaultValues: {
       searchProducts: "",
-      electronics: false,
-      jewelery: false,
-      mensClothing: false,
-      womensClothing: false,
+      tv: false,
+      audio: false,
+      laptop: false,
+      mobile: false,
+      gaming: false,
+      appliances: false,
     },
   });
 
@@ -74,14 +78,15 @@ export default function Search() {
   ) => {
     const category = product.category.toLowerCase();
 
-    const { electronics, jewelery, mensClothing, womensClothing } =
-      searchCategory;
+    const { tv, audio, laptop, mobile, gaming, appliances } = searchCategory;
 
     return (
-      (electronics && category.includes("electronics")) ||
-      (jewelery && category.includes("jewelery")) ||
-      (mensClothing && category.includes("men's clothing")) ||
-      (womensClothing && category.includes("women's clothing"))
+      (tv && category.includes("tv")) ||
+      (audio && category.includes("audio")) ||
+      (laptop && category.includes("laptop")) ||
+      (mobile && category.includes("mobile")) ||
+      (gaming && category.includes("gaming")) ||
+      (appliances && category.includes("appliances"))
     );
   };
 
@@ -93,7 +98,7 @@ export default function Search() {
    *
    * @param data - Objeto com os dados para a busca. Ambos opcionais.
    *  - searchProducts: Titulo do produto.
-   * - electronics, jewelery, mensClothing, womensClothing: Categorias dosprodutos.
+   * - tv, audio, laptop, mobile, gaming, appliances: Categorias dosprodutos.
    *
    */
   const handleSearchProducts = async (data: SearchProductsType) => {
@@ -115,10 +120,12 @@ export default function Search() {
        * Se sim, filtra os produtos com base na categoria.
        */
       const matchesCategory =
-        data.electronics ||
-        data.jewelery ||
-        data.mensClothing ||
-        data.womensClothing
+        data.tv ||
+        data.audio ||
+        data.laptop ||
+        data.mobile ||
+        data.gaming ||
+        data.appliances
           ? filterByCategory(product, data)
           : true;
 
@@ -131,12 +138,19 @@ export default function Search() {
     setLoading(false);
   };
 
+  /**
+   * @description Limpa o campo de busca e de categoria.
+   * @returns Retorna o campo de busca e de categoria vazios e a página atual
+   * como 1.
+   */
   const handleClearSearch = () => {
     setValue("searchProducts", "");
-    setValue("electronics", false);
-    setValue("jewelery", false);
-    setValue("mensClothing", false);
-    setValue("womensClothing", false);
+    setValue("tv", false);
+    setValue("audio", false);
+    setValue("laptop", false);
+    setValue("mobile", false);
+    setValue("gaming", false);
+    setValue("appliances", false);
 
     setCurrentPage(1);
   };
@@ -153,69 +167,91 @@ export default function Search() {
             errors={errors}
             placeholder="Buscar produtos"
             registerField="searchProducts"
-            disabled={isSubmitting}
           />
 
-          <Popover>
-            <PopoverTrigger>
-              <PopoverButton className={styles.popoverButton}>
-                Categorias
-              </PopoverButton>
-            </PopoverTrigger>
+          <div className={styles.searchButtons}>
+            <Popover placement="bottom-end">
+              <PopoverTrigger>
+                <PopoverButton className={styles.popoverButton}>
+                  Categorias
+                </PopoverButton>
+              </PopoverTrigger>
 
-            <Portal>
-              <PopoverContent width={210} padding={6} gap={2}>
-                <CustomCheckbox
-                  registerField="electronics"
-                  {...register("electronics")}
-                  control={control}
-                  errors={errors}
-                >
-                  Eletrónicos
-                </CustomCheckbox>
+              <Portal>
+                <PopoverContent width={210} padding={6} gap={2}>
+                  <CustomCheckbox
+                    registerField="tv"
+                    {...register("tv")}
+                    control={control}
+                    errors={errors}
+                  >
+                    TV
+                  </CustomCheckbox>
 
-                <CustomCheckbox
-                  registerField="jewelery"
-                  {...register("jewelery")}
-                  control={control}
-                  errors={errors}
-                >
-                  Jóias
-                </CustomCheckbox>
+                  <CustomCheckbox
+                    registerField="audio"
+                    {...register("audio")}
+                    control={control}
+                    errors={errors}
+                  >
+                    Áudio
+                  </CustomCheckbox>
 
-                <CustomCheckbox
-                  registerField="mensClothing"
-                  {...register("mensClothing")}
-                  control={control}
-                  errors={errors}
-                >
-                  Roupas masculinas
-                </CustomCheckbox>
+                  <CustomCheckbox
+                    registerField="laptop"
+                    {...register("laptop")}
+                    control={control}
+                    errors={errors}
+                  >
+                    Laptop
+                  </CustomCheckbox>
 
-                <CustomCheckbox
-                  registerField="womensClothing"
-                  {...register("womensClothing")}
-                  control={control}
-                  errors={errors}
-                >
-                  Roupas femininas
-                </CustomCheckbox>
-              </PopoverContent>
-            </Portal>
-          </Popover>
+                  <CustomCheckbox
+                    registerField="mobile"
+                    {...register("mobile")}
+                    control={control}
+                    errors={errors}
+                  >
+                    Mobile
+                  </CustomCheckbox>
 
-          <Button
-            placeholder={<TbFilterSearch />}
-            type="submit"
-            theme="icon"
-            isloading={loading}
-          />
+                  <CustomCheckbox
+                    registerField="gaming"
+                    {...register("gaming")}
+                    control={control}
+                    errors={errors}
+                  >
+                    Gaming
+                  </CustomCheckbox>
 
-          <Button
-            placeholder={<TbFilterX />}
-            theme="icon"
-            onClick={handleClearSearch}
-          />
+                  <CustomCheckbox
+                    registerField="appliances"
+                    {...register("appliances")}
+                    control={control}
+                    errors={errors}
+                  >
+                    Appliances
+                  </CustomCheckbox>
+                </PopoverContent>
+              </Portal>
+            </Popover>
+
+            <div className={styles.searchAndClearFilterButtons}>
+              <Button
+                placeholder={<TbFilterSearch />}
+                type="submit"
+                theme="icon"
+                isloading={loading}
+              />
+
+              <Button
+                placeholder={<TbFilterX />}
+                theme="icon"
+                onClick={handleClearSearch}
+                isloading={loading}
+              />
+            </div>
+          </div>
         </form>
       </div>
     </>
