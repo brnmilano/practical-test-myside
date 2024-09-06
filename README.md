@@ -35,3 +35,6 @@
   ```
   npm run lint
   ```
+- O deploy do projeto foi feito na Vercel e você pode verificá-lo no seguinte link:
+
+  ### -> **[Teste Prático | Software Engineer - Frontend - Next.js](https://practical-test-myside.vercel.app/home)**
