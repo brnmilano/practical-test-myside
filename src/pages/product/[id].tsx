@@ -6,6 +6,8 @@ import { Button } from "@/components/Form/Button";
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import Head from "next/head";
+import { useCart } from "@/hooks/useCart";
+import toast from "react-hot-toast";
 
 interface ProductProps {
   /**
@@ -16,6 +18,14 @@ interface ProductProps {
 
 export default function ViewProduct({ productDetails }: ProductProps) {
   const { id, title, category, price, description, image } = productDetails;
+
+  const { addToCart } = useCart();
+
+  const handleAddToCart = (product: Product) => {
+    addToCart(product);
+
+    toast.success("Produto adicionado ao carrinho.");
+  };
 
   return (
     <>
@@ -61,7 +71,11 @@ export default function ViewProduct({ productDetails }: ProductProps) {
           </p>
 
           <div className={styles.addToCartButton}>
-            <Button placeholder="Adicionar ao carrinho" size="large" />
+            <Button
+              onClick={() => handleAddToCart(productDetails)}
+              placeholder="Adicionar ao carrinho"
+              size="large"
+            />
           </div>
         </div>
       </div>
@@ -93,16 +107,11 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
   const productDetails = {
     id: product.id,
     title: titleFormatted,
-    price: new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format(product.price),
+    price: product.price,
     description: product.description,
     image: product.image,
     category: product.category,
   };
-
-  console.log(productDetails);
 
   return {
     props: {

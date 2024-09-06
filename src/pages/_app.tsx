@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Head from "next/head";
 import { ChakraProvider } from "@chakra-ui/react";
 import { SearchProvider } from "@/hooks/useSearch";
+import { CartProvider } from "@/hooks/useCart";
 
 const inter = Inter({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -19,27 +20,29 @@ export default function App({ Component, pageProps }: AppProps) {
     <Container className={inter.className}>
       <ChakraProvider>
         <CommonProvider>
-          <SearchProvider>
-            <Toaster position="top-center" />
+          <CartProvider>
+            <SearchProvider>
+              <Toaster position="top-center" />
 
-            <Head>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1"
-              />
+              <Head>
+                <meta
+                  name="viewport"
+                  content="width=device-width, initial-scale=1"
+                />
 
-              <link
-                rel="icon"
-                type="image/png"
-                href="./favicon.png"
-                sizes="16x16"
-              />
-            </Head>
+                <link
+                  rel="icon"
+                  type="image/png"
+                  href="./favicon.png"
+                  sizes="16x16"
+                />
+              </Head>
 
-            <Header />
+              <Header />
 
-            <Component {...pageProps} />
-          </SearchProvider>
+              <Component {...pageProps} />
+            </SearchProvider>
+          </CartProvider>
         </CommonProvider>
       </ChakraProvider>
     </Container>

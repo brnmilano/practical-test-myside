@@ -1,3 +1,4 @@
+import { AddressProps } from "@/types/address";
 import {
   Dispatch,
   ReactNode,
@@ -16,6 +17,8 @@ interface CommonContextData {
   setLoading: Dispatch<SetStateAction<boolean>>;
   currentPage: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
+  shippingAddress: AddressProps;
+  setShippingAddress: Dispatch<SetStateAction<AddressProps>>;
 }
 
 export const CommonContext = createContext({} as CommonContextData);
@@ -23,6 +26,9 @@ export const CommonContext = createContext({} as CommonContextData);
 function CommonProvider({ children }: useCommonProps) {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [shippingAddress, setShippingAddress] = useState<AddressProps>(
+    {} as AddressProps
+  );
 
   return (
     <CommonContext.Provider
@@ -31,6 +37,8 @@ function CommonProvider({ children }: useCommonProps) {
         setLoading,
         currentPage,
         setCurrentPage,
+        shippingAddress,
+        setShippingAddress,
       }}
     >
       {children}
