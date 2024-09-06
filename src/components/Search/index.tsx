@@ -8,8 +8,6 @@ import {
   searchProductsSchema,
   SearchProductsType,
 } from "@/models/searchProductsSchema";
-import { TbFilterSearch } from "react-icons/tb";
-import { TbFilterX } from "react-icons/tb";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/Form/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,6 +16,7 @@ import { Button } from "@/components/Form/Button";
 import { useCommon } from "@/hooks/useCommon";
 import { Product } from "@/types/products";
 import { useSearch } from "@/hooks/useSearch";
+import { FiSearch } from "react-icons/fi";
 import CustomCheckbox from "@/components/Form/Checkbox";
 import styles from "./styles.module.scss";
 
@@ -238,15 +237,15 @@ export default function Search() {
 
             <div className={styles.searchAndClearFilterButtons}>
               <Button
-                placeholder={<TbFilterSearch />}
+                placeholder={<FiSearch />}
                 type="submit"
                 theme="icon"
                 isloading={loading}
               />
 
               <Button
-                placeholder={<TbFilterX />}
-                theme="icon"
+                placeholder="Limpar"
+                theme="primary"
                 onClick={handleClearSearch}
                 isloading={loading}
               />

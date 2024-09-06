@@ -4,25 +4,8 @@ import { Spinner } from "@chakra-ui/react";
 import styles from "./styles.module.scss";
 import React from "react";
 import clsx from "clsx";
-import { IconType } from "react-icons";
 
 interface ButtonInterface extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /**
-   * Icon or text to be inserted on the right side of the button.
-   * Example:
-   * * rightIcon={<MdBuild />}
-   *
-   * @type `IconType`
-   */
-  rightIcon?: IconType;
-  /**
-   * Icon or text to be inserted on the left side of the button
-   * Example:
-   * * lefticon={<MdBuild />
-   *
-   * @type `IconType`
-   */
-  lefticon?: IconType;
   /**
    * Propriedade booleana que indica o estado de carregamento do botão,
    * substituindo o texto por um spinner.
@@ -60,14 +43,8 @@ interface ButtonInterface extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "small" | "large";
 }
 
-const RenderButtonIcon = (Icon: any) => {
-  return <Icon />;
-};
-
 export function Button(props: ButtonInterface) {
   const {
-    rightIcon,
-    lefticon,
     theme = "primary",
     isloading,
     placeholder,
@@ -95,17 +72,7 @@ export function Button(props: ButtonInterface) {
       onClick={handleClickOnButton}
       {...rest}
     >
-      {isloading ? (
-        <Spinner color="#fff" />
-      ) : (
-        <>
-          {lefticon && RenderButtonIcon(lefticon)}
-
-          {placeholder}
-
-          {rightIcon && RenderButtonIcon(rightIcon)}
-        </>
-      )}
+      {isloading ? <Spinner color="#fff" /> : <>{placeholder}</>}
     </button>
   );
 }

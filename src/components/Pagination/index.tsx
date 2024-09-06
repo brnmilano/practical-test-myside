@@ -1,4 +1,4 @@
-import { Box, HStack, Button, ButtonGroup } from "@chakra-ui/react";
+import { HStack, Button, ButtonGroup } from "@chakra-ui/react";
 import { MdOutlineChevronLeft } from "react-icons/md";
 import { MdOutlineChevronRight } from "react-icons/md";
 import styles from "./styles.module.scss";
@@ -64,7 +64,7 @@ export const Pagination = ({
   };
 
   return (
-    <Box className={styles.container}>
+    <div className={styles.container}>
       <HStack spacing={2}>
         <button
           className={styles.button}
@@ -90,6 +90,6 @@ export const Pagination = ({
           <MdOutlineChevronRight />
         </button>
       </HStack>
-    </Box>
+    </div>
   );
 };
