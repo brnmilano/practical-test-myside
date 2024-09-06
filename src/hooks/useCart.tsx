@@ -24,13 +24,12 @@ interface CartContextData {
 export const CartContext = createContext({} as CartContextData);
 
 function CartProvider({ children }: useCartProps) {
-  /**
-   * @description Estado que armazena os produtos no carrinho.
-   */
+  // Estado que armazena os produtos no carrinho.
   const [cartItems, setCartItems] = useState<Product[]>([]);
 
   /**
-   * @description Calcula o valor total dos itens no carrinho.
+   * @description Calcula o valor total dos itens no carrinho e retorna o valor
+   * total de todos os itens que estão no carrinho.
    * @param total - Valor total dos itens no carrinho.
    * @param product - Objeto dos produtos a serem somados ao valor total.
    * @returns {number} Retorna o valor somado entre a quantidade de itens e
@@ -47,7 +46,8 @@ function CartProvider({ children }: useCartProps) {
   }, 0);
 
   /**
-   * @description Adiciona um novo produto ao carrinho.
+   * @description Adiciona um novo produto ao carrinho, atualizando o estado
+   * de cartItems e salvando o novo estado no localStorage.
    * @param product - Objeto do produto a ser adicionado ao carrinho.
    */
   function addToCart(product: Product) {
@@ -61,7 +61,8 @@ function CartProvider({ children }: useCartProps) {
   }
 
   /**
-   * @description Remove um produto específico do carrinho.
+   * @description Remove um produto específico do carrinho, atualizando o estado
+   * de cartItems e salvando o novo estado no localStorage.
    * @param productId - ID do produto a ser removido do carrinho.
    */
   function removeCartItem(productId: number) {
@@ -75,9 +76,10 @@ function CartProvider({ children }: useCartProps) {
   }
 
   /**
-   * @description Verifica se um produto específico já existe no carrinho.
+   * @description Verifica se um produto específico já existe no carrinho, com
+   * base no ID do produto.
    * @param productId - ID do produto a ser verificado.
-   * @returns {boolean} Retorna true se o produto já existir no carrinho.
+   * @returns boolean - Retorna true se o produto já existir no carrinho.
    */
   function checkIfItemAlreadyExists(productId: number) {
     return cartItems.some((product) => product.id === productId);

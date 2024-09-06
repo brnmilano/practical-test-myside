@@ -67,7 +67,6 @@ export default function Search() {
 
   /**
    * @description Faz a filtragem dos produtos com base na categoria.
-   *
    * @param product - Produto a ser filtrado.
    * @param searchCategory - Categoria dos produtos.
    * @returns Retorna `true` se o produto pertencer a categoria selecionada.
@@ -95,9 +94,8 @@ export default function Search() {
    * Simula uma requisição assíncrona com delay de 1 segundo para exibir as
    * funcionalidades de loading. Após a busca ser efeutada, atualiza o estado
    * `searchProducts` com os produtos filtrados e reseta a página atual para 1.
-   *
    * @param data - Objeto com os dados para a busca. Ambos opcionais.
-   *  - searchProducts: Titulo do produto.
+   * - searchProducts: Titulo do produto.
    * - tv, audio, laptop, mobile, gaming, appliances: Categorias dosprodutos.
    *
    */
@@ -140,7 +138,7 @@ export default function Search() {
 
   /**
    * @description Limpa o campo de busca e de categoria.
-   * @returns Retorna o campo de busca e de categoria vazios e a página atual
+   * @returns Retorna os campos de busca e de categoria vazios e a página atual
    * como 1.
    */
   const handleClearSearch = () => {
