@@ -1,0 +1,17 @@
+@import "../../styles/breakpoints";
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 5rem;
+
+  .titleAndSubtitle {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    margin-bottom: 2rem;
+  }
+}
