@@ -1,4 +1,4 @@
-# Teste Prático | Software Engineer - Frontend - Next.js | MySide
+## Teste Prático | Software Engineer - Frontend - Next.js | MySide
 
 ## Iniciando o projeto
 
