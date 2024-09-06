@@ -19,6 +19,7 @@ import { useSearch } from "@/hooks/useSearch";
 import { FiSearch } from "react-icons/fi";
 import CustomCheckbox from "@/components/Form/Checkbox";
 import styles from "./styles.module.scss";
+import toast from "react-hot-toast";
 
 interface SearchCategoryAndTitleProps {
   searchProducts: string;
@@ -152,6 +153,8 @@ export default function Search() {
     setValue("appliances", false);
 
     setCurrentPage(1);
+
+    toast.success("Filtros limpos com sucesso!");
   };
 
   return (
@@ -247,7 +250,6 @@ export default function Search() {
                 placeholder="Limpar"
                 theme="primary"
                 onClick={handleClearSearch}
-                isloading={loading}
               />
             </div>
           </div>
