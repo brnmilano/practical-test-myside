@@ -1,27 +1,30 @@
-import { useRouter } from "next/router";
-import { homePath } from "@/constants/paths";
-import Image from "next/image";
-import LogoImg from "../../../public/myside-logo.svg";
-import { IoCart } from "react-icons/io5";
+import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
+import HeaderDesktop from "./HeaderDesktop";
+import HeaderMobile from "./HeaderMobile";
 
 export default function Header() {
-  const router = useRouter();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [scrollY, setScrollY] = useState(0);
 
-  const handleRedirectToHome = () => {
-    router.push(homePath);
-  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  function handleScroll() {
+    setScrollY(window.scrollY);
+  }
 
   return (
-    <header className={styles.container}>
-      <div
-        className={styles.logoWrapper}
-        onClick={() => handleRedirectToHome()}
-      >
-        <Image src={LogoImg} alt="logo" width={118} height={41} />
+    <>
+      <div className={styles.headerDesktopContainer}>
+        <HeaderDesktop />
       </div>
 
-      <IoCart aria-label="Carrinho de compras" />
-    </header>
+      <div className={styles.headerMobileContainer}>
+        <HeaderMobile />
+      </div>
+    </>
   );
 }

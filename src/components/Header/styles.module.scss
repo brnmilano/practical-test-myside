@@ -1,10 +1,73 @@
-.container {
+@import "../../styles/breakpoints.scss";
+
+.headerDesktopContainer {
+  display: none;
+
+  .desktopContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 0;
+
+    .logoWrapper {
+      cursor: pointer;
+    }
+
+    .cartWrapper {
+      position: relative;
+
+      .cartItems {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        height: 25px;
+        width: 24px;
+        background-color: var(--secondary);
+        color: var(--white);
+        font-size: 14px;
+      }
+    }
+  }
+
+  @include media-lg {
+    display: block;
+  }
+}
+
+.headerMobileContainer {
+  display: block;
+
+  .mobileContainer {
+    padding: 1rem 0 2rem 0;
+
+    .closedHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .logoWrapper {
+        cursor: pointer;
+      }
+
+      svg {
+        color: var(--black);
+      }
+    }
+  }
+
+  @include media-lg {
+    display: none;
+  }
+}
+
+.item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem 0;
-
-  .logoWrapper {
-    cursor: pointer;
-  }
+  color: var(--black);
+  padding: 1rem;
 }
