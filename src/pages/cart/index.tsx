@@ -14,7 +14,7 @@ interface FormProps {
   props?: AddressProps;
 }
 
-export default function Checkout({ props }: FormProps) {
+export default function Cart({ props }: FormProps) {
   const router = useRouter();
 
   const { setShippingAddress, setLoading } = useCommon();

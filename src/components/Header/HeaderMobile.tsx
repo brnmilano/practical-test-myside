@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FiAlignJustify } from "react-icons/fi";
-import { homePath } from "@/constants/paths";
+import { cartPath, homePath } from "@/constants/paths";
 import { useRouter } from "next/router";
 import { IoChevronForwardOutline } from "react-icons/io5";
 import Image from "next/image";
@@ -26,14 +26,14 @@ export default function HeaderMobile() {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleClickLink = () => {
     onClose();
 
-    router.push("/cart");
+    router.push(cartPath);
   };
 
   const handleScroll = () => {

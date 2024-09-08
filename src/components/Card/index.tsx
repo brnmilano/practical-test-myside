@@ -2,6 +2,7 @@ import { Product } from "@/types/products";
 import styles from "./styles.module.scss";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { productDetailPath } from "@/constants/paths";
 
 interface CardProps {
   /**
@@ -16,7 +17,7 @@ export default function Card(props: CardProps) {
   const { products } = props;
 
   const handleProductDetails = (productId: number) => {
-    router.push(`/product/${productId}`);
+    router.push(`${productDetailPath}/${productId}`);
   };
 
   return (
@@ -24,6 +25,7 @@ export default function Card(props: CardProps) {
       {products.map((product, index) => (
         <div
           key={`${product.id} ${index}`}
+          data-testid={`${product.id} ${index}`}
           onClick={() => handleProductDetails(product.id)}
           className={styles.productsItems}
         >
@@ -44,7 +46,6 @@ export default function Card(props: CardProps) {
               fill={true}
               objectFit="contain"
               loading="lazy"
-              //sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         </div>

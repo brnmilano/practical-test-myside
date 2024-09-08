@@ -40,6 +40,7 @@ export default function FinishOrder() {
                     <div
                       className={styles.productsContent}
                       key={`${product.id} ${index}`}
+                      data-testid={`${product.id} ${index}`}
                     >
                       <div className={styles.productItem}>
                         <div>
@@ -51,6 +52,7 @@ export default function FinishOrder() {
                         <div
                           onClick={() => handleRemoveProduct(product.id)}
                           className={styles.removeProduct}
+                          key={`${product.id} ${index}`}
                         >
                           Remover
                         </div>

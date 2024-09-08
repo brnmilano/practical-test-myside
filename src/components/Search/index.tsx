@@ -242,6 +242,7 @@ export default function Search() {
                 type="submit"
                 theme="icon"
                 isloading={loading}
+                data-testid="search-button"
               />
 
               <Button
