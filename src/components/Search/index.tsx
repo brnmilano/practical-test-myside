@@ -17,6 +17,7 @@ import { useCommon } from "@/hooks/useCommon";
 import { Product } from "@/types/products";
 import { useSearch } from "@/hooks/useSearch";
 import { FiSearch } from "react-icons/fi";
+// import { usePathname, useSearchParams } from "next/navigation";
 import CustomCheckbox from "@/components/Form/Checkbox";
 import styles from "./styles.module.scss";
 import toast from "react-hot-toast";
@@ -25,15 +26,13 @@ interface SearchCategoryAndTitleProps {
   searchProducts: string;
   tv: boolean;
   audio: boolean;
-  laptop: boolean;
   mobile: boolean;
   gaming: boolean;
-  appliances: boolean;
 }
 
 export default function Search() {
   const { productsArray, setSearchProducts } = useSearch();
-  const { loading, setLoading, setCurrentPage } = useCommon();
+  const { loading, setLoading } = useCommon();
 
   const {
     control,
@@ -48,10 +47,8 @@ export default function Search() {
       searchProducts: "",
       tv: false,
       audio: false,
-      laptop: false,
       mobile: false,
       gaming: false,
-      appliances: false,
     },
   });
 
@@ -77,15 +74,13 @@ export default function Search() {
   ) => {
     const category = product.category.toLowerCase();
 
-    const { tv, audio, laptop, mobile, gaming, appliances } = searchCategory;
+    const { tv, audio, mobile, gaming } = searchCategory;
 
     return (
       (tv && category.includes("tv")) ||
       (audio && category.includes("audio")) ||
-      (laptop && category.includes("laptop")) ||
       (mobile && category.includes("mobile")) ||
-      (gaming && category.includes("gaming")) ||
-      (appliances && category.includes("appliances"))
+      (gaming && category.includes("gaming"))
     );
   };
 
@@ -96,7 +91,7 @@ export default function Search() {
    * `searchProducts` com os produtos filtrados e reseta a página atual para 1.
    * @param data - Objeto com os dados para a busca. Ambos opcionais.
    * - searchProducts: Titulo do produto.
-   * - tv, audio, laptop, mobile, gaming, appliances: Categorias dosprodutos.
+   * - tv, audio, mobile e gaming: Categorias dosprodutos.
    *
    */
   const handleSearchProducts = async (data: SearchProductsType) => {
@@ -118,12 +113,7 @@ export default function Search() {
        * Se sim, filtra os produtos com base na categoria.
        */
       const matchesCategory =
-        data.tv ||
-        data.audio ||
-        data.laptop ||
-        data.mobile ||
-        data.gaming ||
-        data.appliances
+        data.tv || data.audio || data.mobile || data.gaming
           ? filterByCategory(product, data)
           : true;
 
@@ -131,7 +121,6 @@ export default function Search() {
     });
 
     setSearchProducts(filteredProducts);
-    setCurrentPage(1);
 
     setLoading(false);
   };
@@ -145,12 +134,8 @@ export default function Search() {
     setValue("searchProducts", "");
     setValue("tv", false);
     setValue("audio", false);
-    setValue("laptop", false);
     setValue("mobile", false);
     setValue("gaming", false);
-    setValue("appliances", false);
-
-    setCurrentPage(1);
 
     toast.success("Filtros limpos com sucesso!");
   };
@@ -198,15 +183,6 @@ export default function Search() {
                   </CustomCheckbox>
 
                   <CustomCheckbox
-                    registerField="laptop"
-                    {...register("laptop")}
-                    control={control}
-                    errors={errors}
-                  >
-                    Laptop
-                  </CustomCheckbox>
-
-                  <CustomCheckbox
                     registerField="mobile"
                     {...register("mobile")}
                     control={control}
@@ -222,15 +198,6 @@ export default function Search() {
                     errors={errors}
                   >
                     Gaming
-                  </CustomCheckbox>
-
-                  <CustomCheckbox
-                    registerField="appliances"
-                    {...register("appliances")}
-                    control={control}
-                    errors={errors}
-                  >
-                    Appliances
                   </CustomCheckbox>
                 </PopoverContent>
               </Portal>
