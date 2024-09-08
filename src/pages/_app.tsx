@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import type { AppProps } from "next/app";
 import "../styles/index.scss";
 import { Toaster } from "react-hot-toast";
@@ -14,6 +15,10 @@ const inter = Inter({
   weight: ["100", "300", "400", "500", "700", "900"],
   subsets: ["latin"],
 });
+
+if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
+  require("../mocks");
+}
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
