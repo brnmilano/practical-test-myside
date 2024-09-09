@@ -1,7 +1,7 @@
 import { render, screen } from "@/mocks/test-utils";
 import { server } from "@/mocks/server";
 import { userEvent } from "@testing-library/user-event";
-import Search from ".";
+import Search from "../src/components/Search";
 
 // establish API mocking before all tests
 beforeAll(() => server.listen());
