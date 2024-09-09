@@ -41,7 +41,8 @@
   Alteração da variavel de ambiente:
 
   ```
-  Vá até o arquivo .env e altere a váriavel de ambiente NEXT_PUBLIC_API_MOCKING para enabled. Isso irá ativar a simulação (mocks) das requisições.
+  Vá até o arquivo .env e altere a váriavel de ambiente NEXT_PUBLIC_API_MOCKING para enabled.
+  Isso irá ativar a simulação (mocks) das requisições.
 
   -> NEXT_PUBLIC_API_MOCKING=enabled
   ```
