@@ -14,12 +14,29 @@
 
     .searchButtons {
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
       gap: 1.25rem;
 
       .searchAndClearFilterButtons {
         display: flex;
         gap: 1.25rem;
+
+        &:first-child {
+          > button {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include media-sm {
+  .searchWrapper {
+    .formWrapper {
+      .searchButtons {
+        flex-direction: row;
       }
     }
   }

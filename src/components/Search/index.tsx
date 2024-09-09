@@ -155,55 +155,55 @@ export default function Search() {
           />
 
           <div className={styles.searchButtons}>
-            <Popover placement="bottom-end">
-              <PopoverTrigger>
-                <PopoverButton className={styles.popoverButton}>
-                  Categorias
-                </PopoverButton>
-              </PopoverTrigger>
-
-              <Portal>
-                <PopoverContent width={210} padding={6} gap={2}>
-                  <CustomCheckbox
-                    registerField="tv"
-                    {...register("tv")}
-                    control={control}
-                    errors={errors}
-                  >
-                    TV
-                  </CustomCheckbox>
-
-                  <CustomCheckbox
-                    registerField="audio"
-                    {...register("audio")}
-                    control={control}
-                    errors={errors}
-                  >
-                    Áudio
-                  </CustomCheckbox>
-
-                  <CustomCheckbox
-                    registerField="mobile"
-                    {...register("mobile")}
-                    control={control}
-                    errors={errors}
-                  >
-                    Mobile
-                  </CustomCheckbox>
-
-                  <CustomCheckbox
-                    registerField="gaming"
-                    {...register("gaming")}
-                    control={control}
-                    errors={errors}
-                  >
-                    Gaming
-                  </CustomCheckbox>
-                </PopoverContent>
-              </Portal>
-            </Popover>
-
             <div className={styles.searchAndClearFilterButtons}>
+              <Popover placement="bottom-end">
+                <PopoverTrigger>
+                  <PopoverButton className={styles.popoverButton}>
+                    Categorias
+                  </PopoverButton>
+                </PopoverTrigger>
+
+                <Portal>
+                  <PopoverContent width={210} padding={6} gap={2}>
+                    <CustomCheckbox
+                      registerField="tv"
+                      {...register("tv")}
+                      control={control}
+                      errors={errors}
+                    >
+                      TV
+                    </CustomCheckbox>
+
+                    <CustomCheckbox
+                      registerField="audio"
+                      {...register("audio")}
+                      control={control}
+                      errors={errors}
+                    >
+                      Áudio
+                    </CustomCheckbox>
+
+                    <CustomCheckbox
+                      registerField="mobile"
+                      {...register("mobile")}
+                      control={control}
+                      errors={errors}
+                    >
+                      Mobile
+                    </CustomCheckbox>
+
+                    <CustomCheckbox
+                      registerField="gaming"
+                      {...register("gaming")}
+                      control={control}
+                      errors={errors}
+                    >
+                      Gaming
+                    </CustomCheckbox>
+                  </PopoverContent>
+                </Portal>
+              </Popover>
+
               <Button
                 placeholder={<FiSearch />}
                 type="submit"
@@ -211,13 +211,13 @@ export default function Search() {
                 isloading={loading}
                 data-testid="search-button"
               />
-
-              <Button
-                placeholder="Limpar"
-                theme="primary"
-                onClick={handleClearSearch}
-              />
             </div>
+
+            <Button
+              placeholder="Limpar"
+              theme="primary"
+              onClick={handleClearSearch}
+            />
           </div>
         </form>
       </div>
