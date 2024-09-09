@@ -1,7 +1,7 @@
 import { render, screen } from "@/mocks/test-utils";
 import { server } from "@/mocks/server";
 import { userEvent } from "@testing-library/user-event";
-import Checkout from ".";
+import Checkout from "../src/pages/cart";
 
 // establish API mocking before all tests
 beforeAll(() => server.listen());

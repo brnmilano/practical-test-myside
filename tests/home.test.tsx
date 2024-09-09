@@ -1,4 +1,4 @@
-import Home from ".";
+import Home from "../src/pages/home";
 import { render, screen } from "@/mocks/test-utils";
 import { server } from "@/mocks/server";
 import { userEvent } from "@testing-library/user-event";

@@ -1,6 +1,6 @@
 import { render, screen } from "@/mocks/test-utils";
 import { server } from "@/mocks/server";
-import ViewProduct from "./[id]";
+import ViewProduct from "../src/pages/product/[id]";
 import { Product } from "@/types/products";
 import userEvent from "@testing-library/user-event";
 
