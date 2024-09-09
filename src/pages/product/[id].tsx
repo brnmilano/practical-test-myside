@@ -19,7 +19,11 @@ interface ProductProps {
 export default function ViewProduct({ productDetails }: ProductProps) {
   const { id, title, category, price, description, image } = productDetails;
 
-  const { addToCart } = useCart();
+  const { addToCart, cartItems } = useCart();
+
+  const checkIfItemAlreadyExists = (productId: number) => {
+    return cartItems.some((item) => item.id === productId);
+  };
 
   const handleAddToCart = (product: Product) => {
     addToCart(product);
@@ -75,6 +79,7 @@ export default function ViewProduct({ productDetails }: ProductProps) {
               onClick={() => handleAddToCart(productDetails)}
               placeholder="Adicionar ao carrinho"
               size="large"
+              disabled={checkIfItemAlreadyExists(id)}
             />
           </div>
         </div>
