@@ -47,7 +47,6 @@ export default function Card(props: CardProps) {
               quality={75}
               objectFit="contain"
               loading="lazy"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         </div>
