@@ -44,8 +44,10 @@ export default function Card(props: CardProps) {
               src={product.image}
               alt={product.title}
               fill={true}
+              quality={75}
               objectFit="contain"
               loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         </div>
