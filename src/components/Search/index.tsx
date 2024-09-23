@@ -210,13 +210,15 @@ export default function Search() {
                 theme="icon"
                 isloading={loading}
                 data-testid="search-button"
+                aria-label="Buscar produtos"
               />
             </div>
 
             <Button
               placeholder="Limpar"
-              theme="primary"
+              theme="secondary"
               onClick={handleClearSearch}
+              aria-label="Limpar filtros"
             />
           </div>
         </form>

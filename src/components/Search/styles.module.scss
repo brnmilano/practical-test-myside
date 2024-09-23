@@ -22,6 +22,12 @@
         display: flex;
         gap: 1.25rem;
 
+        .popoverButton {
+          background-color: transparent !important;
+          border: 1px solid var(--secondary) !important;
+          color: var(--black) !important;
+        }
+
         &:first-child {
           > button {
             width: 100%;

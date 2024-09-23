@@ -70,6 +70,7 @@ export const Pagination = ({
           className={styles.button}
           onClick={() => handleChangePage(currentPage - 1)}
           disabled={disabled || currentPage === 1}
+          aria-label="Página anterior"
         >
           <MdOutlineChevronLeft />
         </button>
@@ -86,6 +87,7 @@ export const Pagination = ({
           className={styles.button}
           onClick={() => handleChangePage(currentPage + 1)}
           disabled={disabled || currentPage === pagesQuantity}
+          aria-label="Próxima página"
         >
           <MdOutlineChevronRight />
         </button>
