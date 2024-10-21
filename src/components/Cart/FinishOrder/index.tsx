@@ -54,7 +54,7 @@ export default function FinishOrder() {
                           className={styles.removeProduct}
                           key={`${product.id} ${index}`}
                         >
-                          Remover
+                          Removerr
                         </div>
                       </div>
                     </div>
