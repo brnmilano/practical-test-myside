@@ -26,7 +26,11 @@ export default function HeaderDesktop() {
         className={styles.logoWrapper}
         onClick={() => handleRedirectToHome()}
       >
-        <Image src={LogoImg} alt="logo" width={118} height={41} />
+        <Image
+          src={LogoImg}
+          alt="logo"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
       </div>
 
       <div className={styles.cartWrapper}>

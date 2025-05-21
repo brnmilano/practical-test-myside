@@ -26,6 +26,7 @@
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-line-clamp: 3;
+      line-clamp: 3;
       -webkit-box-orient: vertical;
     }
 
@@ -41,5 +42,9 @@
     justify-content: center;
     height: 150px;
     position: relative;
+
+    .image {
+      object-fit: contain;
+    }
   }
 }

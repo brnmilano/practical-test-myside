@@ -41,12 +41,14 @@ export default function Card(props: CardProps) {
 
           <div className={styles.imageWrapper}>
             <Image
+              priority={false}
               src={product.image}
               alt={product.title}
-              fill={true}
+              fill
               quality={75}
-              objectFit="contain"
+              className={styles.image}
               loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         </div>

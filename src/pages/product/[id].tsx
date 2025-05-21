@@ -54,11 +54,10 @@ export default function ViewProduct({ productDetails }: ProductProps) {
             <Image
               src={image}
               alt={title}
-              fill={true}
-              objectFit="contain"
-              loading="lazy"
+              fill
+              className={styles.image}
               quality={75}
-            
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         </div>
@@ -104,7 +103,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
   const productId = params?.id;
 
   const response = await api.get<{ product: Product }>(
-    `${productsPath}/${productId}`
+    `${productsPath}/${productId}`,
   );
 
   const { product } = response.data;

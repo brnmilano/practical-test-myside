@@ -51,7 +51,14 @@ export default function HeaderMobile() {
           className={styles.logoWrapper}
           onClick={() => handleRedirectToHome()}
         >
-          <Image src={Logo} alt="logo" width={118} height={41} />
+          <Image
+            priority={false}
+            src={Logo}
+            alt="logo"
+            width={118}
+            height={41}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
         </div>
 
         <IconButton
@@ -70,7 +77,13 @@ export default function HeaderMobile() {
 
           <DrawerHeader>
             <div className={styles.logoWrapper}>
-              <Image src={Logo} alt="logo" width={118} height={41} />
+              <Image
+                src={Logo}
+                alt="logo"
+                width={118}
+                height={41}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
             </div>
           </DrawerHeader>
 
